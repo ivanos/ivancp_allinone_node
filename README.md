@@ -6,8 +6,8 @@ This is an Erlang node that contains:
 1. [dobby_core_lib](https://github.com/ivanos/dobby_core_lib)
 2. [dobby_rest_lib](https://github.com/ivanos/dobby_rest_lib)
 3. [dobby_ui_lib](https://github.com/ivanos/dobby_ui_lib)
-1. [lucet](https://github.com/ivanos/lucet)
-1. [weave](https://github.com/ivanos/weave)
+1. [lucet_core_lib](https://github.com/ivanos/lucet)
+1. [weave_core_lib](https://github.com/ivanos/weave)
 
 
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc/generate-toc again -->
@@ -51,7 +51,7 @@ to the `erl_sshd` section of `config/sys.config`.
 ## Running
 
 ```
-_rel/ivancp_allinone_node/bin/dobby_allinone_node
+_rel/ivancp_allinone/bin/ivancp_allinone
 ```
 
 To access the Dobby Visualizer go to http://localhost:8080/static/www/index.html
