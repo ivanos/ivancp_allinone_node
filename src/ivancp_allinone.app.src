@@ -1,0 +1,16 @@
+{application, ivancp_allinone,
+ [
+  {description, ""},
+  {vsn, "1"},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib,
+                  erl_sshd,
+                  dobby,
+                  dobby_rest,
+                  lucet,
+                  weave
+                 ]},
+  {env, []}
+ ]}.
