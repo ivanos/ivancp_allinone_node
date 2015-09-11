@@ -8,9 +8,10 @@ This is an Erlang node that contains:
 3. [dobby_ui_lib](https://github.com/ivanos/dobby_ui_lib)
 1. [lucet_core_lib](https://github.com/ivanos/lucet)
 1. [weave_core_lib](https://github.com/ivanos/weave)
+1. [erl_cowboy](https://github.com/ivanos/erl_cowboy)
 
 
-<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc/generate-toc again -->
+<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
 **Table of Contents**
 
 - [IvanOS Control Plane All In One](#ivanos-control-plane-all-in-one)
@@ -18,9 +19,9 @@ This is an Erlang node that contains:
     - [Building](#building)
     - [Running](#running)
     - [Connecting via ssh](#connecting-via-ssh)
+    - [Configuring TLS](#configuring-tls)
 
 <!-- markdown-toc end -->
-
 
 ## Requirements
 - Erlang R17+
@@ -67,3 +68,38 @@ ssh 127.0.0.1 -p 11144 -i id_rsa
 ```
 
 To exit the Erlang shell obtained via ssh call `exit().`
+
+
+## Configuring TLS
+
+To enable TLS support for the HTTP interface you have to configure it in the `erl_cowboy`
+application and provide the following options:
+
+* certificate file name (expected in the `priv/erl_cowboy`)
+* key file name (expected in the `priv/erl_cowboy`)
+* password to the key if it is password protected
+
+The configuration has to be placed in the sys.config file. Below is an example:
+```erlang
+[
+...
+ {erl_cowboy, [
+               {port, 8080},
+               {listeners, 10},
+               {app, 'ivancp_allinone'},
+               {tls_enabled, true},
+               {tls_opts, [{certfile, "dummy.crt"},
+                           {keyfile, "dummy.key"},
+                           {password, ""}]}
+               ]},
+...
+]
+```
+
+There is a sample certificate and key generator that you can run with:
+`make tls`.
+The above example config works with the generated files. To test the TLS,
+put the config snippet into the `config/sys.config`. Remember
+to re-generated the release after the change.
+
+With TLS enabled, the Visualizer can be accessed via https://localhost:8080/static/www/index.html.
